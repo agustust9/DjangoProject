@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitors List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        a {
+            display: inline-block;
+            margin: 10px 5px;
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td a {
+            color: #4CAF50;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+
+        td a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .empty-row td {
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <h1>Visitors List</h1>
+    <a href="/">Back to Home</a>
+    <a href="/visitors/register/">Register New Visitor</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Check-in Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for visitor in visitors %}
+            <tr>
+                <td>{{ visitor.id }}</td>
+                <td>{{ visitor.name }}</td>
+                <td>{{ visitor.email }}</td>
+                <td>{{ visitor.phone }}</td>
+                <td>{{ visitor.check_in_date }}</td>
+                <td>
+                    <a href="/visitors/update/{{ visitor.id }}/">Edit</a>
+                    <a href="/visitors/delete/{{ visitor.id }}/">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr class="empty-row">
+                <td colspan="6">No visitors registered yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
